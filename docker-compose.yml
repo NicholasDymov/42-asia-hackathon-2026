@@ -1,0 +1,19 @@
+services:
+  hackathon-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 42_hackathon_mistral_agent
+    environment:
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY:-}
+      - MISTRAL_MODEL=${MISTRAL_MODEL:-mistral-large-latest}
+    ports:
+      - "8501:8501"
+    volumes:
+      # Mount code so changes can be iterated live without rebuilding container
+      - ./app:/app/app:ro
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
