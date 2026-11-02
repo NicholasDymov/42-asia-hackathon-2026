@@ -1,9 +1,22 @@
 import os
-import streamlit as st
+import sys
+from pathlib import Path
 import json
-from app.config import MISTRAL_API_KEY, MISTRAL_MODEL
-from app.agent import CorporateAgent
-from app.tools import MOCK_DATABASE, AUDIT_LOGS
+import streamlit as st
+
+# Ensure project root is in sys.path
+_root_dir = str(Path(__file__).resolve().parent.parent)
+if _root_dir not in sys.path:
+    sys.path.insert(0, _root_dir)
+
+try:
+    from app.config import MISTRAL_API_KEY, MISTRAL_MODEL
+    from app.agent import CorporateAgent
+    from app.tools import MOCK_DATABASE, AUDIT_LOGS
+except ImportError:
+    from config import MISTRAL_API_KEY, MISTRAL_MODEL
+    from agent import CorporateAgent
+    from tools import MOCK_DATABASE, AUDIT_LOGS
 
 st.set_page_config(
     page_title="WorkPulse AI - Corporate Productivity Agent",

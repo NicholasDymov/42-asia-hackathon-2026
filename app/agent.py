@@ -1,8 +1,18 @@
 import os
+import sys
+from pathlib import Path
 import json
 import time
 from typing import Generator, Dict, Any, List
-from app.tools import MISTRAL_TOOLS, dispatch_tool_call, AUDIT_LOGS
+
+_root_dir = str(Path(__file__).resolve().parent.parent)
+if _root_dir not in sys.path:
+    sys.path.insert(0, _root_dir)
+
+try:
+    from app.tools import MISTRAL_TOOLS, dispatch_tool_call, AUDIT_LOGS
+except ImportError:
+    from tools import MISTRAL_TOOLS, dispatch_tool_call, AUDIT_LOGS
 
 SYSTEM_PROMPT = """You are WorkPulse AI, an autonomous corporate productivity agent.
 Your mission is to eliminate enterprise bottlenecks by following the PLAN -> CONNECT -> ACT paradigm:
