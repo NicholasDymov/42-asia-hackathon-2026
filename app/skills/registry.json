@@ -1,0 +1,212 @@
+{
+  "skills": {
+    "query_system_status": {
+      "name": "query_system_status",
+      "category": "DEVOPS",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 15,
+      "success_count": 32,
+      "failure_count": 0,
+      "roles_permitted": ["DevOps", "Executive"],
+      "requires_human_approval": false,
+      "description": "Fetches real-time server health, CPU load, and database cluster metrics.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "query_system_status",
+          "description": "Fetches real-time server health, CPU load, and database cluster metrics.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "service_filter": {
+                "type": "string",
+                "description": "Optional name or ID filter (e.g. 'postgres', 'tokyo')."
+              }
+            }
+          }
+        }
+      }
+    },
+    "execute_server_failover": {
+      "name": "execute_server_failover",
+      "category": "DEVOPS",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 12,
+      "success_count": 8,
+      "failure_count": 0,
+      "roles_permitted": ["DevOps", "Executive"],
+      "requires_human_approval": false,
+      "description": "Executes emergency failover to standby replica or provisions cloud capacity.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "execute_server_failover",
+          "description": "Executes emergency failover to standby replica or provisions cloud capacity.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "cluster_id": {
+                "type": "string",
+                "description": "The cluster ID to failover, e.g. 'srv-tokyo-db'"
+              },
+              "standby_instance_type": {
+                "type": "string",
+                "description": "Instance type, e.g. 'r6g.2xlarge'"
+              }
+            },
+            "required": ["cluster_id"]
+          }
+        }
+      }
+    },
+    "query_financial_records": {
+      "name": "query_financial_records",
+      "category": "FINANCE",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 20,
+      "success_count": 45,
+      "failure_count": 0,
+      "roles_permitted": ["Finance", "Executive"],
+      "requires_human_approval": false,
+      "description": "Fetches corporate invoices, PO numbers, and tax compliance records.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "query_financial_records",
+          "description": "Fetches corporate invoices, PO numbers, and tax compliance records.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "invoice_no": {
+                "type": "string",
+                "description": "Specific invoice number to inspect, e.g. 'INV-TYO-901'."
+              }
+            }
+          }
+        }
+      }
+    },
+    "allocate_emergency_funds": {
+      "name": "allocate_emergency_funds",
+      "category": "FINANCE",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 10,
+      "success_count": 6,
+      "failure_count": 0,
+      "roles_permitted": ["Finance", "Executive"],
+      "requires_human_approval": false,
+      "description": "Dispatches emergency budget allocation for off-hours incidents. Can be autonomously delegated to trusted agents.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "allocate_emergency_funds",
+          "description": "Dispatches emergency budget allocation for off-hours incidents.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "amount_yen": {
+                "type": "integer",
+                "description": "Amount to allocate in JPY (Max cap: ¥200,000)"
+              },
+              "justification": {
+                "type": "string",
+                "description": "Reason for emergency disbursement (e.g. 'P0 Database Failover')"
+              },
+              "recipient_dept": {
+                "type": "string",
+                "description": "Target department, e.g. 'DevOps'"
+              }
+            },
+            "required": ["amount_yen", "justification"]
+          }
+        }
+      }
+    },
+    "create_jira_ticket": {
+      "name": "create_jira_ticket",
+      "category": "SHARED",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 50,
+      "success_count": 120,
+      "failure_count": 0,
+      "roles_permitted": ["DevOps", "Finance", "Executive"],
+      "requires_human_approval": false,
+      "description": "Files an incident or cross-departmental task in Jira.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "create_jira_ticket",
+          "description": "Files an incident or cross-departmental task in Jira.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "summary": {"type": "string"},
+              "description": {"type": "string"},
+              "priority": {"type": "string", "enum": ["Low", "Medium", "High", "Critical"]},
+              "assignee": {"type": "string"}
+            },
+            "required": ["summary", "description"]
+          }
+        }
+      }
+    },
+    "send_slack_notification": {
+      "name": "send_slack_notification",
+      "category": "SHARED",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 50,
+      "success_count": 140,
+      "failure_count": 0,
+      "roles_permitted": ["DevOps", "Finance", "Executive"],
+      "requires_human_approval": false,
+      "description": "Broadcasts an update or handoff request to Slack channels.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "send_slack_notification",
+          "description": "Broadcasts an update or handoff request to Slack channels.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel": {"type": "string"},
+              "message": {"type": "string"}
+            },
+            "required": ["channel", "message"]
+          }
+        }
+      }
+    },
+    "search_knowledge_base": {
+      "name": "search_knowledge_base",
+      "category": "SHARED",
+      "type": "ACTION_TOOL",
+      "status": "TRUSTED",
+      "trust_score": 40,
+      "success_count": 88,
+      "failure_count": 0,
+      "roles_permitted": ["DevOps", "Finance", "Executive"],
+      "requires_human_approval": false,
+      "description": "Searches corporate runbooks, SOPs, and internal policies.",
+      "schema": {
+        "type": "function",
+        "function": {
+          "name": "search_knowledge_base",
+          "description": "Searches corporate runbooks, SOPs, and internal policies.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {"type": "string"}
+            },
+            "required": ["query"]
+          }
+        }
+      }
+    }
+  }
+}
